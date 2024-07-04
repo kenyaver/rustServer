@@ -3,9 +3,11 @@ use std::{fs,
         net::{TcpListener, TcpStream},
         thread,
         time::Duration};
+use rust_server::ThreadPool;
+
 fn main() {
     let tcp_listener = TcpListener::bind("192.168.10.92:1500").unwrap();
-    // let pool = ThreadPool::new();
+    let pool = ThreadPool::new(5);
 
     for stream in tcp_listener.incoming() {
         let stream = stream.unwrap();
